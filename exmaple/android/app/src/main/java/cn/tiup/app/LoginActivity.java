@@ -1,62 +1,28 @@
 package cn.tiup.app;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import cn.tiup.sdk.oauth.Config;
 import cn.tiup.sdk.oauth.Token;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -101,7 +67,13 @@ public class LoginActivity extends BaseActivity {
         mWebView.setVisibility(View.VISIBLE);
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+            @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 if (!Uri.parse(url).getScheme().contains("http")) {
                     Uri uri = Uri.parse(url);
                     String authCode = uri.getQueryParameter("code");
@@ -114,9 +86,7 @@ public class LoginActivity extends BaseActivity {
                         Toast.makeText(getApplicationContext(),"ERROR: " + error, Toast.LENGTH_SHORT).show();
                     }
                     mWebView.setVisibility(View.GONE);
-                    Log.e("AAAA", url);
                 }
-
                 super.onPageStarted(view, url, favicon);
             }
 
@@ -127,7 +97,6 @@ public class LoginActivity extends BaseActivity {
                 mProgressBar.setProgress(newProgress);
             }
         });
-
         CookieManager.getInstance().removeAllCookies(new ValueCallback<Boolean>() {
             @Override
             public void onReceiveValue(Boolean value) {
@@ -137,8 +106,10 @@ public class LoginActivity extends BaseActivity {
                 mWebView.loadUrl(url);
             }
         });
-
     }
+
+
+
 
     /**
      * 异步获取token

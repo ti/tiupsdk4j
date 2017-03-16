@@ -3,16 +3,10 @@ package cn.tiup.app;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import java.io.IOException;
-
-import cn.tiup.sdk.oauth.Oauth2;
-import cn.tiup.sdk.oauth.Token;
-import cn.tiup.sdk.util.Oauth2Utils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;

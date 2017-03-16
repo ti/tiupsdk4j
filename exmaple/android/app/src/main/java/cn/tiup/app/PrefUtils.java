@@ -3,7 +3,6 @@ package cn.tiup.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import cn.tiup.sdk.oauth.Token;
 import cn.tiup.sdk.util.GsonUtils;
 
@@ -23,7 +22,6 @@ public class PrefUtils {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         sp.edit().remove(TOKEN).apply();
     }
-
 
 
 

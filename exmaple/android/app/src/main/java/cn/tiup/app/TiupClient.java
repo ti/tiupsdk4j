@@ -5,11 +5,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
 import cn.tiup.sdk.oauth.Config;
 import cn.tiup.sdk.oauth.Oauth2;
 import cn.tiup.sdk.oauth.Token;
@@ -103,8 +101,7 @@ public class TiupClient {
         } catch (PackageManager.NameNotFoundException e) {
             versionName = "?";
         }
-        return packageName + "/" + versionName + " (Linux;Android " + Build.VERSION.RELEASE
-                + ")";
+        return packageName + "/" + versionName + " (Linux;Android " + Build.VERSION.RELEASE + ")";
     }
 
 
