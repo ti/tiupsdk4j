@@ -51,6 +51,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.tiup.sdk.oauth.Config;
 import cn.tiup.sdk.oauth.Token;
@@ -130,7 +131,9 @@ public class LoginActivity extends BaseActivity {
         CookieManager.getInstance().removeAllCookies(new ValueCallback<Boolean>() {
             @Override
             public void onReceiveValue(Boolean value) {
-                String url = TiupClient.getInstance().getOauthConfig().getAuthCodeUrl("oauth-android-login", new HashMap<String, String>());
+                Map<String, String> params = new HashMap<>();
+                params.put("access_type","offline");
+                String url = TiupClient.getInstance().getOauthConfig().getAuthCodeUrl("oauth-android-login", params);
                 mWebView.loadUrl(url);
             }
         });
