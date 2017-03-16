@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -73,6 +72,7 @@ public class LoginActivity extends BaseActivity {
             }
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+
                 mProgressBar.setVisibility(View.VISIBLE);
                 if (!Uri.parse(url).getScheme().contains("http")) {
                     Uri uri = Uri.parse(url);
@@ -81,7 +81,6 @@ public class LoginActivity extends BaseActivity {
                     if (authCode != null ) {
                         mAuthTask = new UserLoginTask();
                         mAuthTask.execute(authCode);
-
                     } else if (error != null) {
                         Toast.makeText(getApplicationContext(),"ERROR: " + error, Toast.LENGTH_SHORT).show();
                     }
@@ -101,8 +100,6 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
-
-
 
 
     /**
@@ -142,6 +139,7 @@ public class LoginActivity extends BaseActivity {
                 if (onLoginIntent == null) {
                     onLoginIntent = MainActivity.makeIntent(LoginActivity.this);
                 }
+                onLoginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(onLoginIntent);
             }
         }

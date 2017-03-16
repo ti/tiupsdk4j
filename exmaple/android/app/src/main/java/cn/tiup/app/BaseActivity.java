@@ -22,7 +22,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-
     public void setContent(@LayoutRes int layoutResID) {
         View.inflate(this, layoutResID, ((ViewGroup) getWindow().getDecorView().getRootView()));
     }
