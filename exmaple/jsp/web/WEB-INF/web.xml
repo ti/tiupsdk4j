@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!--示例页面，获取用户基本信息，获取过程将自动收取TOKEN-->
+    <servlet-mapping>
+        <servlet-name>Example</servlet-name>
+        <url-pattern>/exp</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Example</servlet-name>
+        <servlet-class>exmaple.ExampleServlet</servlet-class>
+    </servlet>
+
+    <!--登录引导页面(入口地址)， 重定向到用户页面完成授权-->
+    <servlet-mapping>
+        <servlet-name>OauthLogin</servlet-name>
+        <url-pattern>/oauth/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OauthLogin</servlet-name>
+        <servlet-class>cn.tiup.sdk.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <!--用户授权后回调页面, 你可以参考里边到源码，补充自己的回调页面-->
+    <servlet-mapping>
+        <servlet-name>Callback</servlet-name>
+        <url-pattern>/oauth/callback</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Callback</servlet-name>
+        <servlet-class>cn.tiup.sdk.servlet.CallbackServlet</servlet-class>
+    </servlet>
+</web-app>
