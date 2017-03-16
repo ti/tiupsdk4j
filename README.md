@@ -1,14 +1,11 @@
 # TiUP Oauth API SDK For Java
 
-## 说明
+## 目录说明
 
-exmaple/jsp 目录：jsp Servlet 示例
-exmaple/android 目录： android 示例
+* src/:  SDK源码
+* exmaple/jsp：jsp示例
+* exmaple/android： android示例
 
-> 编译时请确保您的网络通畅，可能需要翻墙才能编译成功。
-
-
-src 目录： API SDK 源码
 
 ## 特性：
 
