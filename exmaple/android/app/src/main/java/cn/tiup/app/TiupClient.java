@@ -57,13 +57,13 @@ public class TiupClient {
      * 退出client
      */
     public void logout() {
-        this.token = null;
-        this.oauth2Client = null;
         try {
             this.oauth2Client.revoke();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.token = null;
+        this.oauth2Client = null;
     }
 
     /**
