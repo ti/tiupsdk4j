@@ -47,17 +47,21 @@ public class MainActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText("获取失败： " + msg);
+                        textView.setText("网络错误： " + msg);
                     }
                 });
             }
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, final Response response) throws IOException {
                 final String respBody = response.body().string();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText("获取成功： " + respBody);
+                        if (response.code() ==  200) {
+                            textView.setText("获取成功： " + respBody);
+                        } else {
+
+                        }  textView.setText("获取错误： " + respBody);
                     }
                 });
             }
