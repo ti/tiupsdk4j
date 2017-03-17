@@ -83,9 +83,7 @@ public class MainActivity extends BaseActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             TiupClient.getInstance().logout();
-            Intent intent = LoginActivity.makeIntent(this,null);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            WelcomActivity.start(this);
             return true;
         }
 

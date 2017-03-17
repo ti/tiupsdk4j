@@ -57,11 +57,7 @@ public class TiupClient {
      * 退出client
      */
     public void logout() {
-        try {
-            this.oauth2Client.revoke();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.oauth2Client.revoke();
         this.token = null;
         this.oauth2Client = null;
     }

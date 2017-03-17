@@ -44,7 +44,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     public static void start(Activity fromActivity,Intent onLogin) {
-        fromActivity.startActivity(makeIntent(fromActivity, onLogin));
+        Intent intent = makeIntent(fromActivity, onLogin);
+        fromActivity.startActivity(intent);
     }
 
     @Override
@@ -79,6 +80,7 @@ public class LoginActivity extends BaseActivity {
                     String authCode = uri.getQueryParameter("code");
                     String error = uri.getQueryParameter("error");
                     if (authCode != null ) {
+                        mProgressBar.setVisibility(View.VISIBLE);
                         mAuthTask = new UserLoginTask();
                         mAuthTask.execute(authCode);
                     } else if (error != null) {
@@ -100,7 +102,6 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
-
 
     /**
      * 异步获取token
@@ -135,11 +136,11 @@ public class LoginActivity extends BaseActivity {
             mAuthTask = null;
             if (success) {
                 //跳转到新页面
-                finish();
                 if (onLoginIntent == null) {
                     onLoginIntent = MainActivity.makeIntent(LoginActivity.this);
                 }
-                onLoginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                onLoginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                finish();
                 startActivity(onLoginIntent);
             }
         }

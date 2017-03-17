@@ -42,7 +42,7 @@ public class Oauth2 {
      * 注销当前Token
      * @throws IOException
      */
-    public void revoke() throws IOException {
+    public void revoke() {
         if (tokenChangeListener != null) {
             tokenChangeListener.onRevoke(token);
         }
@@ -178,6 +178,19 @@ public class Oauth2 {
         if (!((apiUrl.startsWith("http://")) || (apiUrl.startsWith("https://")))) {
             apiUrl = config.getBaseURL() + apiUrl;
         }
+        if(callback == null) {
+            callback = new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+
+                }
+            };
+        }
         Request request = new Request.Builder()
                 .header("User-Agent", config.getUserAgent())
                 .url(apiUrl)
@@ -233,6 +246,7 @@ public class Oauth2 {
 
     //auto refresh access token when it is isExpired
     private  class RefreshTokenInterceptor implements Interceptor {
+
         @Override
         public Response intercept(Chain chain) throws IOException {
             if (token.isExpired() && token.getRefreshToken() != null)  {

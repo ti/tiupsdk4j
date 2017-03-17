@@ -71,9 +71,8 @@ public class Oauth2Utils {
     }
 
 
-    private static Oauth2 authTokenClient = null;
     /**
-     * 获取 authTokenClient Oauth2 单例
+     * 获取 authTokenClient Oauth2
      * 一般可用于手机端，在手机APP初始化时，从配置文件读取并生成, 服务端是多用户的，不适合此接口
      * @param config 配置文件
      * @param tokenSource 已经保存的有效的TOKEN源。
@@ -81,15 +80,9 @@ public class Oauth2Utils {
      * @return
      * @throws IOException
      */
-    public static Oauth2 authTokenClient(Config config, Token tokenSource, Oauth2.TokenChangeListener listener) {
-        if (authTokenClient == null) {
-            authTokenClient =  new Oauth2(config, tokenSource);
-            authTokenClient.setOnTokenChangeListener(listener);
-        }
+    public static Oauth2 newAuthTokenClient(Config config, Token tokenSource, Oauth2.TokenChangeListener listener) {
+        Oauth2 authTokenClient =  new Oauth2(config, tokenSource);
+        authTokenClient.setOnTokenChangeListener(listener);
         return authTokenClient;
-    }
-
-    public static void removeTokenClient() {
-        authTokenClient = null;
     }
 }

@@ -1,6 +1,6 @@
 package cn.tiup.app;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,14 +18,17 @@ public class WelcomActivity extends AppCompatActivity {
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 LoginActivity.start(WelcomActivity.this,null);
             }
         });
     }
 
-
-    public static void start(Context context) {
-        context.startActivity(new Intent(context, WelcomActivity.class));
+    public static void start(Activity fromActivity) {
+        Intent intent = new Intent(fromActivity, WelcomActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        fromActivity.startActivity(intent);
+        fromActivity.finish();
     }
 
 }
