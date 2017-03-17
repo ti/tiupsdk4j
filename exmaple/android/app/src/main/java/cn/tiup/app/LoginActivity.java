@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public static void start(Activity fromActivity,Intent onLogin) {
-        fromActivity.startActivity(makeIntent(fromActivity, null));
+        fromActivity.startActivity(makeIntent(fromActivity, onLogin));
     }
 
     @Override
