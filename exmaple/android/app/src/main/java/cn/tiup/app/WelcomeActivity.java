@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class WelcomActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +19,13 @@ public class WelcomActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                LoginActivity.start(WelcomActivity.this,null);
+                LoginActivity.start(WelcomeActivity.this,null);
             }
         });
     }
 
     public static void start(Activity fromActivity) {
-        Intent intent = new Intent(fromActivity, WelcomActivity.class);
+        Intent intent = new Intent(fromActivity, WelcomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         fromActivity.startActivity(intent);
         fromActivity.finish();

@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!isLogin()) {
-            WelcomActivity.start(this);
+            WelcomeActivity.start(this);
             finish();
             return;
         }
@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             TiupClient.getInstance().logout();
-            WelcomActivity.start(this);
+            WelcomeActivity.start(this);
             return true;
         }
 
