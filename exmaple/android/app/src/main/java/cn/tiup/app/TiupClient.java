@@ -22,6 +22,10 @@ public class TiupClient {
     private  Oauth2 oauth2Client;
     private  Token token;
 
+    /**
+     * 获取全局client单例
+     * @return
+     */
     public static TiupClient getInstance() {
         if (instance == null) {
             instance = new TiupClient();
@@ -30,6 +34,10 @@ public class TiupClient {
     }
 
 
+    /**
+     * 初始化Oauth， 你可能需要从保存的学校配置文件中初始化
+     * @return
+     */
     public void init(Context context) {
         //relace this in your code, when your config file is dynamic
         Config config = Config.getInstance();
@@ -45,12 +53,19 @@ public class TiupClient {
         mContext = context;
     }
 
+    /**
+     * 退出client
+     */
     public void logout() {
         PrefUtils.removeToken(mContext);
         this.token = null;
         this.oauth2Client = null;
     }
 
+    /**
+     * 获取Oauth2Client单例
+     * @return
+     */
     public Oauth2 getOauth2Client() {
         if (oauth2Client != null) {
             return oauth2Client;
@@ -87,11 +102,18 @@ public class TiupClient {
 
     }
 
+    /**
+     * 获取当前Oauth配置内容
+     * @return
+     */
     public Config getOauthConfig() {
        return mOauthConfig;
     }
 
-    //You should provide what client for your app
+    /**
+     * 每个应用都应该有自己都UserAgent，包括：当前包名，版本号，系统等
+     * @return
+     */
     private static String getUserAgent(Context context) {
         String packageName = context.getPackageName();
         String versionName;
@@ -103,13 +125,6 @@ public class TiupClient {
         }
         return packageName + "/" + versionName + " (Linux;Android " + Build.VERSION.RELEASE + ")";
     }
-
-
-    public Oauth2 getOauthClient() throws IOException {
-        return Oauth2Utils.clientCredentialsClient(this.getOauthConfig());
-
-    }
-
 
 }
 
