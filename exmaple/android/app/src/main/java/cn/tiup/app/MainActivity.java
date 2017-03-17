@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText("获取成功： " + msg);
+                        textView.setText("获取失败： " + msg);
                     }
                 });
             }
