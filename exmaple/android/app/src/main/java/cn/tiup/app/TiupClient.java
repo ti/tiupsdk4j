@@ -5,13 +5,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Toast;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import cn.tiup.sdk.oauth.Config;
 import cn.tiup.sdk.oauth.Oauth2;
 import cn.tiup.sdk.oauth.Token;
-import cn.tiup.sdk.util.Oauth2Utils;
 
 
 public class TiupClient {
@@ -57,9 +57,13 @@ public class TiupClient {
      * 退出client
      */
     public void logout() {
-        PrefUtils.removeToken(mContext);
         this.token = null;
         this.oauth2Client = null;
+        try {
+            this.oauth2Client.revoke();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
