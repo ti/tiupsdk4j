@@ -1,9 +1,11 @@
 package cn.tiup.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -60,7 +62,12 @@ public class TiupClient {
         this.oauth2Client.revoke();
         this.token = null;
         this.oauth2Client = null;
+        Intent intent = new Intent(mContext, WelcomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        mContext.startActivity(intent);
     }
+
+
 
     /**
      * 获取Oauth2Client单例
@@ -89,8 +96,7 @@ public class TiupClient {
         oauth2Client.setOnTokenUnauthorizedListener(new Oauth2.TokenUnauthorizedListener() {
             @Override
             public void onUnauthorized() {
-                PrefUtils.removeToken(mContext);
-                mContext.startActivity(LoginActivity.makeIntent(mContext,null));
+                logout();
                 if ((new Date().getTime()- token.getExpiryAt().getTime())> (TimeUnit.DAYS.toMillis(25))) {
                     Toast.makeText(mContext,"您长期没有登录，请重新登录", Toast.LENGTH_SHORT).show();
                 } else {

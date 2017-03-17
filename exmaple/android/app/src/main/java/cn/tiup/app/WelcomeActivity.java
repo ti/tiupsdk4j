@@ -18,7 +18,6 @@ public class WelcomeActivity extends AppCompatActivity {
         findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 LoginActivity.start(WelcomeActivity.this,null);
             }
         });
