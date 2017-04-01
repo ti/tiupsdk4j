@@ -28,7 +28,7 @@ GenericResponse<UserInfo> resp = oauth2.getUserInfo();
 
 ```java
 Oauth2 client =  Oauth2Utils.clientCredentialsClient(Config.getInstance())
-GenericResponse<SomeObject> resp = oauth.get("/apis/v1/object",SomeObject.class)
+GenericResponse<SomeObject> resp = client.get("/apis/v1/object",SomeObject.class)
 ```
  
 * 2. Android 手机端
