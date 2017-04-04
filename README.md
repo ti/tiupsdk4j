@@ -21,7 +21,7 @@
 ### 用户授权
 ```java
 Oauth2 client = Oauth2Utils.userServletClient(request);
-GenericResponse<UserInfo> resp = oauth2.getUserInfo();
+GenericResponse<UserInfo> resp = client.getUserInfo();
 ```
 
 #### 企业应用授权
